@@ -12,14 +12,25 @@ const Inputs = ({ value, onChange }) => {
     return (
         <div style={style}>
             <p>Inputs</p>
-            <NumberFeild name='a' value={value.a} onChange={onChange} />
-            <NumberFeild name="b" value={value.b} onChange={onChange} />
+            <NumberFeild 
+                name='a' 
+                value={value.a} 
+                onChange={onChange} 
+            />
+            <NumberFeild 
+                name="b" 
+                value={value.b} 
+                onChange={onChange} 
+            />
         </div>
     )
 }
 
 Inputs.propTypes = {
-    value: PropTypes.object.isRequired,
+    value: PropTypes.shape({
+        a: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+        b: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    }).isRequired,
     onChange: PropTypes.func.isRequired
 }
 

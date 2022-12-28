@@ -70,22 +70,33 @@ const App = () => {
     // function for handling the onclick event of the clear button
     const handleClr = () => {
         setInputValue({...initialInput});
-        setResult(0)
+        setResult(0);
+        setRestoredHistory(null);
     }
 
     // function for handling the onclick event of the restore button 
     const handleRestore = (histr) => {
         setInputValue({...histr.inputValue});
         setResult(histr.result);
-        setRestoredHistory({...histr});
+        setRestoredHistory(histr.id);
     }
 
     return (
         <div className='container'>
             <h1>Result = {result}</h1>
-            <Inputs value={inputValue} onChange={handleChange} />
-            <Operators handleOperator={handleOperator} handleClr={handleClr} />
-            <HistoryCard histories={histories} handleRestore={handleRestore} restoredHistory={restoredHistory} />
+            <Inputs 
+                value={inputValue} 
+                onChange={handleChange} 
+            />
+            <Operators 
+                handleOperator={handleOperator} 
+                handleClr={handleClr} 
+            />
+            <HistoryCard 
+                histories={histories} 
+                handleRestore={handleRestore} 
+                restoredHistory={restoredHistory} 
+            />
         </div>
     )
 }

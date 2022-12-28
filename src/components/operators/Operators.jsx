@@ -1,7 +1,46 @@
 import PropTypes from 'prop-types';
+import getID from '../../utils/generateId';
 import Button from '../ui/Button';
 
 const Operators = ({ handleOperator, handleClr }) => {
+    const operations = [
+        {
+            id: getID.next().value,
+            text: '+',
+            onClick: () => handleOperator('+')
+        },
+        {
+            id: getID.next().value,
+            text: '-',
+            onClick: () => handleOperator('-')
+        },
+        {
+            id: getID.next().value,
+            text: '*',
+            onClick: () => handleOperator('*')
+        },
+        {
+            id: getID.next().value,
+            text: '/',
+            onClick: () => handleOperator('/')
+        },
+        {
+            id: getID.next().value,
+            text: '%',
+            onClick: () => handleOperator('%')
+        },
+        {
+            id: getID.next().value,
+            text: '**',
+            onClick: () => handleOperator('**')
+        },
+        {
+            id: getID.next().value,
+            text: 'clear',
+            onClick: handleClr
+        }
+    ]
+
     const customStyle = {
         fontSize: '1.2rem',
         padding: '0.4rem 0.8rem',
@@ -18,12 +57,9 @@ const Operators = ({ handleOperator, handleClr }) => {
     return (
         <div style={style}>
             <p>Operations</p>
-            <Button onClick={() => handleOperator('+')} text={'+'} customStyle={customStyle} />
-            <Button onClick={() => handleOperator('-')} text={'-'} customStyle={customStyle} />
-            <Button onClick={() => handleOperator('*')} text={'*'} customStyle={customStyle} />
-            <Button onClick={() => handleOperator('/')} text={'/'} customStyle={customStyle} />
-            <Button onClick={() => handleOperator('%')} text={'%'} customStyle={customStyle} />
-            <Button onClick={handleClr} text={'clear'} customStyle={customStyle} />
+            {
+                operations.map(ops => <Button key={ops.id} onClick={ops.onClick} text={ops.text} customStyle={customStyle} />)
+            }
         </div>
     )
 }

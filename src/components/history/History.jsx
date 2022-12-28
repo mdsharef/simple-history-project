@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import HistoryItem from '../ui/HistoryItem';
+import HistoryItem from './HistoryItem';
 
 const HistoryCard = ({ histories, handleRestore, restoredHistory }) => {
     return (
@@ -21,9 +21,18 @@ const HistoryCard = ({ histories, handleRestore, restoredHistory }) => {
 }
 
 HistoryCard.propTypes = {
-    histories: PropTypes.array.isRequired,
+    histories: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        inputValue: PropTypes.shape({
+            a: PropTypes.number.isRequired,
+            b: PropTypes.number.isRequired,
+        }),
+        operator: PropTypes.string.isRequired,
+        result: PropTypes.number.isRequired,
+        date: PropTypes.object.isRequired,
+    })).isRequired,
     handleRestore: PropTypes.func.isRequired,
-    restoredHistory: PropTypes.object,
+    restoredHistory: PropTypes.number,
 }
 
 export default HistoryCard;
