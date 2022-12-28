@@ -14,31 +14,31 @@
     flex-direction: column;
 }
 
-.inputBx {
+/* .inputBx {
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 1rem;
-}
+} */
 
-.inputBx input {
+/* .inputBx input {
     padding: 0.5rem;
     margin: 1rem;
-}
+} */
 
-.operator {
+/* .operator {
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 1.5rem;
-}
+} */
 
-.operator button {
+/* .operator button {
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
     cursor: pointer;
-}
+} */
 
 .history {
     margin-top: 1rem;
@@ -67,8 +67,8 @@
     margin-bottom: 0.5rem;
 }
 
-.history ul li button {
+/* .history ul li button {
     font-size: 1rem;
     padding: 0.5rem 1rem;
     cursor: pointer;
-}
+} */

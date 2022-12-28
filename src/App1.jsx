@@ -1,10 +1,5 @@
 import { useState } from 'react';
 import './app.css';
-import HistoryCard from './components/history/History';
-import Inputs from './components/inputs/Inputs';
-import Operators from './components/operators/Operators';
-import getID from './utils/generateId';
-
 
 /**
  * DONE: handle user input fields
@@ -19,6 +14,33 @@ const initialInput = {
     a: 10,
     b: 15
 };
+
+// function to dynamically generate id for history 
+function* generateId() {
+    let id = 100;
+    while (true) {
+        yield id++;
+    }
+}
+let getID = generateId();
+
+// History Item Component
+const HistoryItem = ({histr, handleRestore, restoredHistory}) => {
+    return (
+        <li>
+            <p>
+                operation = {histr.inputValue.a} {histr.operator} {histr.inputValue.b}, result = {histr.result}
+            </p>
+            <small>{histr.date.toLocaleString()}</small>
+            <button 
+                onClick={()=> handleRestore(histr)} 
+                disabled={restoredHistory !== null && restoredHistory.id === histr.id} 
+            >
+                restore
+            </button>
+        </li>
+    )
+}
 
 // Main App Component
 const App = () => {
@@ -82,9 +104,34 @@ const App = () => {
     return (
         <div className='container'>
             <h1>Result = {result}</h1>
-            <Inputs value={inputValue} onChange={handleChange} />
-            <Operators handleOperator={handleOperator} handleClr={handleClr} />
-            <HistoryCard histories={histories} handleRestore={handleRestore} restoredHistory={restoredHistory} />
+            <div className="inputBx">
+                <p>Inputs</p>
+                <input type="number" name="a" value={inputValue.a} onChange={handleChange} />
+                <input type="number" name="b" value={inputValue.b} onChange={handleChange} />
+            </div>
+            <div className="operator">
+                <p>Operations</p>
+                <button onClick={() => handleOperator('+')}>+</button>
+                <button onClick={() => handleOperator('-')}>-</button>
+                <button onClick={() => handleOperator('*')}>*</button>
+                <button onClick={() => handleOperator('/')}>/</button>
+                <button onClick={() => handleOperator('%')}>%</button>
+                <button onClick={handleClr}>clear</button>
+            </div>
+            <div className="history">
+                <h3>History :-</h3>
+                {
+                    histories.length === 0 ? 
+                        (<h4>There is no history</h4>) :
+                        (
+                            <ul>
+                                {
+                                    histories.map(histr => <HistoryItem key={histr.id} histr={histr} handleRestore={handleRestore} restoredHistory={restoredHistory} />)
+                                }
+                            </ul>
+                        )
+                }
+            </div>
         </div>
     )
 }
