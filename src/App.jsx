@@ -38,6 +38,7 @@ const App = () => {
             ...inputValue,
             [e.target.name]: v
         })
+        setRestoredHistory(null);
     }
 
     // function for handling the onclick event of the operator buttons
